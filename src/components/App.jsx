@@ -1,6 +1,6 @@
 import React from 'react';
 import Phonebook from './Phonebook';
-import ContactListItem from './ContactListItem';
+import ContactList from './ContactList';
 import Filter from './Filter';
 import { nanoid } from 'nanoid';
 
@@ -63,7 +63,7 @@ export class App extends React.Component {
         <h2>Contacts</h2>
         <Filter filter={this.state.filter} onInput={this.handleInput} />
 
-        <ContactListItem
+        <ContactList
           arrayOfNames={this.state.contacts.filter(contact =>
             contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
           )}
