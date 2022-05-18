@@ -15,6 +15,30 @@ export class App extends React.Component {
     filter: '',
   };
 
+  componentDidMount() {
+    console.log('componentDidMount');
+    const savedContacts = localStorage.getItem('contacts');
+    const parsedContacts = JSON.parse(savedContacts);
+
+    if (parsedContacts) {
+      this.setState({
+        contacts: [...parsedContacts],
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log('componentDidUpdate');
+    if (prevState.contacts !== this.state.contacts) {
+      console.log('обновились контакты');
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
+  // componentWillUnmount() {
+  //   console.log('componentWillUnmount');
+  // }
+
   formSubmitHandler = data => {
     const find = this.state.contacts
       .map(({ name }) => name.toLowerCase())
